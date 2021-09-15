@@ -1,5 +1,6 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
+const { ENGINE_METHOD_RAND } = require('constants');
 
 const outputHTML = (html) => {
   fs.writeFile('output.html', html, (err) => {
@@ -48,14 +49,17 @@ const renderInfo = (email, id, gitHub) => {
   if(!/^http|https/.test(gitHub)) {
     gitHub = 'http://' + gitHub;
   }
-return`<ul class="list-group">
+return`<div class="card-body">
+<ul class="list-group">
 <li class="list-group-item">E-Mail: ${email}</li>
 <li class="list-group-item">ID#: ${id}</li>
 </ul>
 <div class="card-body">
 <a href="https://github.com/${gitHub}" class="card-link text-white">GitHub</a>
+</div>
 </div>`
 }
+
 
 inquirer
   .prompt([
