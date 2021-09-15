@@ -49,7 +49,7 @@ return`<div class="card-body">
 </div>`
 }
 
-const renderInfo = (email, id, gitHub) => {
+const renderInfo = (email, id, gitHub, school) => {
   if(!/^http|https/.test(gitHub)) {
     gitHub = 'http://' + gitHub;
   }
@@ -57,6 +57,7 @@ return`<div class="card-body">
 <ul class="list-group">
 <li class="list-group-item">E-Mail: ${email}</li>
 <li class="list-group-item">ID#: ${id}</li>
+<li class="list-group-item">School: ${school}</li>
 </ul>
 <div class="card-body">
 <a href="https://github.com/${gitHub}" class="card-link text-white">GitHub</a>
@@ -93,9 +94,14 @@ inquirer
       name: 'gitHub',
       message: 'Do you know their GitHub account?'
     },
-  ]).then(({ name, position, email, id, gitHub }) => {
+    {
+      type: 'input',
+      name: 'school',
+      message: 'If you are an Intern, what school are you currently at?'
+    },
+  ]).then(({ name, position, email, id, gitHub, school }) => {
     const header = renderHeader(name, position);
-    const empInfo = renderInfo(email, id, gitHub);
+    const empInfo = renderInfo(email, id, gitHub, school);
     const baseTemplate = renderBaseTemplate(
       header,
       empInfo,
